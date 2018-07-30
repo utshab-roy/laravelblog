@@ -12,14 +12,25 @@ class PostsController extends Controller
     public function index(){
 
 //        return 'hello';
-        return view('posts.index');
+//        $posts = Post::all();//asc order
+        $posts = Post::latest()->get();
+
+        return view('posts.index', compact('posts'));
     }
 
-    public function show(){
+    //general way
+//    public function show($id){
+//
+////        return 'hello';
+//        $post = Post::find($id);
+//        return view('posts.show', compact('post'));
+//    }
 
-//        return 'hello';
-        return view('posts.show');
-    }
+//Route model binding
+public function show(Post $post){
+    return view('posts.show', compact('post'));
+}
+//route model binding
 
     public function create(){
 
@@ -33,10 +44,41 @@ class PostsController extends Controller
          * and redirect to the homepage.
          */
 
-        dd(request()->all());
+//        dd(request()->all());
+//        dd(request('title'));
+//        dd(request(['title', 'body']));
+
+        /*//this is the first method
         $post = new Post;
+        //new post assigning new value to the field
+        $post->title = request('title');
+        $post->body = request('body');
+        //save to database
+        $post->save();
+        //redirect to the home page
+        return redirect('/');
+        //end of first method*/
+
+        //second method
+//        Post::create([
+//            'title' => request('title'),
+//            'body'  => request('body')
+//        ]);
+        //second method end
+
+        //third method
+
+        $this->validate(request(), [
+            'title' => 'required',
+            'body'  => 'required'
+        ]);
+
+        Post::create(request(['title', 'body']));
+        //end of third method
+        return redirect('/');
+
+
 //        dd(request('body'));
-        return view('posts.create');
     }
 
 

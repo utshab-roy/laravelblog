@@ -11,12 +11,15 @@
 |
 */
 
-
+//homepage
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 //showing all the post
-Route::get('/posts', 'PostsController@index');
+Route::get('/', 'PostsController@index');
 
 //show the specific post
-//Route::get('/posts/{post}', 'PostsController@show');
+Route::get('/posts/{post}', 'PostsController@show');
 
 Route::get('/posts/create', 'PostsController@create');
 

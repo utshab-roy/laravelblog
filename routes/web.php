@@ -16,7 +16,12 @@
 Route::get('/posts', 'PostsController@index');
 
 //show the specific post
-Route::get('/posts/{post}', 'PostsController@show');
+//Route::get('/posts/{post}', 'PostsController@show');
+
+Route::get('/posts/create', 'PostsController@create');
+
+Route::post('/posts', 'PostsController@store');
+Route::get('/posts/create', 'PostsController@create');
 
 //showing all the task as list
 Route::get('/tasks', 'TasksController@index');

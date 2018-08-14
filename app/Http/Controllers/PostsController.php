@@ -13,7 +13,7 @@ class PostsController extends Controller
 
 //        return 'hello';
 //        $posts = Post::all();//asc order
-        $posts = Post::latest()->get();
+        $posts = Post::latest()->get();//latest() is responsible for the desc order
 
         return view('posts.index', compact('posts'));
     }
@@ -69,13 +69,13 @@ public function show(Post $post){
         //third method
 
         $this->validate(request(), [
-            'title' => 'required',
+            'title' => 'required|min:5',
             'body'  => 'required'
         ]);
 
         Post::create(request(['title', 'body']));
         //end of third method
-        return redirect('/');
+        return redirect('/posts');
 
 
 //        dd(request('body'));

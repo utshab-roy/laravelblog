@@ -16,15 +16,20 @@
 //    return view('welcome');
 //});
 //showing all the post
-Route::get('/', 'PostsController@index');
+Route::get('/', function (){
+    return view('welcome');
+});
 
-//show the specific post
-Route::get('/posts/{post}', 'PostsController@show');
+Route::get('/posts', 'PostsController@index');
 
-Route::get('/posts/create', 'PostsController@create');
+
+Route::get('/posts/create', 'PostsController@create');  //the program does not work if we
 
 Route::post('/posts', 'PostsController@store');
-Route::get('/posts/create', 'PostsController@create');
+
+//show the specific post
+Route::get('/posts/{post}', 'PostsController@show');    //switch these two line of code. WHY ?
+
 
 //showing all the task as list
 Route::get('/tasks', 'TasksController@index');
